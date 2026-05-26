@@ -1,0 +1,205 @@
+Git lunttilappu
+Gitin asetukset
+git config <laajuus> <asetus> <arvo>
+
+Yleisimmät asetukset:
+
+git config <laajuus> user.name “<name>”
+Nimen asettaminen
+git config <laajuus> user.email <email>
+Sähköpostiosoitteen asettaminen
+git config <laajuus> core.editor <editor>
+Oletustekstieditorin asettaminen
+Laajuudet:
+
+--local
+Tietovarastokohtainen
+--global
+Käyttäjäkohtainen
+--system
+Kaikille käyttäjille
+Tietovaraston alustus
+Tyhjän tietovaraston alustus:
+
+git init <polku>
+Olemassa olevan tietovaraston kloonaus:
+
+git clone <url> <polku>
+Kloonauksessa hyödyllisiä vipuja:
+
+--recurse-submodules
+Kloonaa myös tietovarastolle määritellyt submoduulit
+Indeksin käyttö
+Peruskomennot:
+
+git add <polku>
+Tiedostojen lisäys
+git rm <polku>
+Tiedostojen poisto
+git reset
+Indeksin tyhjennys
+Hyödyllisiä vipuja (git add):
+
+-p / --patch
+Tiedoston lisääminen osissa.
+-f / --force
+Lisää .gitignoren pois suodattamat tiedostot.
+-A / --all
+Lisää kaikki uudet tiedostot, muokkaukset ja poistot määritellystä polusta.
+Hyödyllisiä vipuja (git rm):
+
+--cached
+Tiedosto(t) säilytetään työpuussa
+-r
+Rekursiivinen poisto (kokonaisten hakemistojen poistoon).
+Hyödyllisiä vipuja (git reset):
+
+-p / --patch
+Indeksistä poisto osissa.
+Commitin luonti
+Peruskomento:
+
+git commit
+Hyödyllisiä vipuja:
+
+-m / --message “<viesti>”
+Luo commitin annetulla viestillä ilman editorin käyttöä.
+--amend
+Commit luodaan HEADin tilalle. (Committien korjaus)
+Tietovaraston synkronointi
+Peruskomennot:
+
+git pull <remote>
+
+git fetch <remote>
+
+git push <remote> <haara>
+Hyödyllisiä vipuja (git pull):
+
+Katso git fetch ja git merge.
+Hyödyllisiä vipuja (git fetch):
+
+--all
+(Korvaa <remote>) Noutaa viitteet ja objektit kaikista etätietovarastoista.
+Hyödyllisiä vipuja (git push):
+
+--all
+Puskee kaikki paikalliset haarat.
+--prune
+Poistaa etätietovarastosta kaikki haarat, joita ei ole paikallisessa tietovarastossa. VARO!!!
+-d / --delete
+Poistaa määritellyn viiteen (haaara tai tagi) etätietovarastosta
+-f / --force
+Poistaa turvatarkastukset puskusta. VAARANA MENETTÄÄ COMMITTEJA PYSYVÄSTI!!! Käytä ainoastaan jos tarpeellista rebasen seurauksena!
+Versiohistorian käyttö
+Peruskomennot:
+
+git log <polku>
+Lokien selaaminen
+git checkout <commit> -- <polku>
+Polkujen palauttamine
+git blame <commit> -- <polku>
+Rivien luontitietojen tarkastelu
+Hyödyllisiä vipuja (git log):
+
+--oneline
+Listaa commitit yksittäisinä riveinä.
+--all
+Listaa commitit kaikista viitteistä (haarat ja tagit).
+--follow
+Seuraa määritellyn polun historiaa myös uudellennimeämisten yli
+--since=<pvm> / --after=<pvm>
+Listaa ainoastaan commitit määritellyn päivämäärän jälkeen.
+--until=<pvm> / --before=<pvm>
+Listaa ainoastaan commitit ennen määritelyä päivämäärää.
+--author=<regexp>
+Listaa ainoastaan commitit, joiden alkuperäinen tekijä täsmää annettuun regexpiin.
+--commiter=<regexp>
+Lista ainoastaan commitit, joiden luoja täsmää annettuun regexpiin.
+--grep=<regexp>
+Listaa ainoastaan commitit, joiden viesti täsmää annettuun regexpiin.
+Hyödyllisiä vipuja (git checkout):
+
+-p / --patch
+Osissa tapahtuva tiedostoversioiden palautus.
+Hyödyllisiä vipuja (git blame):
+
+-L <alku>,<loppu>
+Näyttää blamen ainoastaan määritellylle rivialueelle.
+Haarat
+Peruskomennot:
+
+git branch <haaran nimi>
+Luo uuden haaran.
+git checkout <haaran nimi>
+Siirtää HEADin määriteltyyn haaraan.
+git merge <haaran nimi>
+Yhdistää haaran HEADiin.
+git rebase <haara>
+Siirtää nykyisen haaran alkukohdan määriteltyyn haaraan.
+git reset <commit>
+Siirtää nykyisen haaran osoittamaan määriteltyä committia.
+Hyödyllisiä vipuja (git branch):
+
+-d / --delete <haaran nimi>
+Poistaa haaran
+-f / --force
+Pakottaa haaran luonnin. (Korvaa olemassa olevan haaran uudella)
+-l / --list
+(Ilman haaran nimeä) Listaa tietovaraston haarat.
+-a / --all
+(Ilman haaran nimeä) Listaa myös etätietovarastojen haarat.
+-v / -vv / --verbose
+Näyttää myös mihin committiin haarat viittaavat.
+-t / --track <remote>/<haara>
+Asettaa luodun haaran seuraamaan määriteltyä etätietovaraston haaraa.
+Hyödyllisiä vipuja (git checkout):
+
+-b “<nimi>”
+Luo uuden haaran annetulla nimellä, jos sellaista ei ollut olemassa.
+-B “<nimi>”
+Luo uuden haaran ja ylikirjoittaa mahdollisesti olemassaolevan samannimisen haaran
+-f / --force <haara>
+Siirtyy toiseen haaraan, vaikka nykyisessä olisi tallentamattomia muutoksia. HUOM: muutokset katoavat.
+-t / --track <remote>/<haara>
+Luo uuden lokaalin haaran remote repositorion haarasta
+--orphan
+Luo uuden haaran, jolla ei ole pohjacommittia.
+Hyödyllisiä vipuja (git merge):
+
+--no-commit
+Suorittaa merge-operaation, mutta pysähtyy ennen commitin luomista.
+--no-ff
+Fast-forward tilanteissa luodaan merge-commit.
+--ff-only
+Suorittaa merge-operaation vain jos kyseessä on fast-forward -tilanne.
+--squash
+Yhdistää haaran yhtenä committina.
+-m “<viesti>”
+Määrittelee merge-commitille viestin.
+--abort
+(Konfliktitilanteissa) Peruuttaa merge-operaation ja palauttaa tietovaraston alkuperäiseen tilaan ennen mergeä.
+--quit
+(Konfliktitilanteissa) Peruuttaa merge-operaation, mutta jättää indeksin ja työpuun konfliktoituneeseen tilaan.
+--continue
+(Konfliktitilanteissa) Jatkaa merge-operaation loppuun.
+Hyödyllisiä vipuja (git rebase):
+
+-i / --interactive
+Avaa listan, jossa voi määritellä mitä rebasessa siirrettäville commiteille tehdään.
+--continue
+(Konfliktissa) Jatkaa rebase-operaatiota konfliktin ratkomisen jälkeen.
+--abort
+Peruuttaa rebase-operaation. Palauttaa HEADin ja työpuun alkuperäiseen tilaan ennen rebasea.
+--quit
+Peruuttaa rebase-operaation. Jättää HEADin nykyiseen kohtaan sekä indeksin ja työpuun nykyiseen tilaan.
+Hyödyllisiä vipuja (git reset):
+
+--soft
+Haaran siirto ei vaikuta indeksiin tai työpuuhun.
+--mixed
+Haaran siirto nollaa indeksin, mutta ei työpuuta.
+--hard
+Haaran siirto nollaa indeksin ja asettaa työpuun vastaamaan committia.
+--keep
+Haaran siirto nollaa indeksin ja asettaa työpuun vastaaman committia. Toiminto peruutetaan, jos se poistaisi paikallisia muutoksia.
